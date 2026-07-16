@@ -48,12 +48,13 @@ function getData(data) {
 }
 
 function getLink(clickHere) {
-    // Get Persisted Membership Dates
+    // Read Persisted Membership Dates
     const jsonfile = require('jsonfile');
     const file = './data.json';
     const membershipDates = jsonfile.readFileSync(file);
     const today = (new Date()).toISOString().split('T')[0];
 
+    // Match for a hyperlink to open membership window
     const regex = new RegExp(/href="(.*?)"/);
     const match = regex.exec(clickHere.replaceAll('\n', ''));
 
@@ -63,6 +64,7 @@ function getLink(clickHere) {
 
     // Open Membership Window
     if (match) {
+        // Persist lowest date
         if (today < membershipDates.openDate) {
             membershipDates.openDate = today;
         }
@@ -70,8 +72,9 @@ function getLink(clickHere) {
         subject = 'Club Membership OPENED on ' + membershipDates.openDate;
         text = match[1].trim();
     }
-    // Clsoed Membership Window
+    // Otherwise, Closed Membership Window
     else {
+        // Persist lowest date
         if (today < membershipDates.closedDate) {
             membershipDates.closedDate = today;
         }
@@ -80,18 +83,19 @@ function getLink(clickHere) {
         text = 'No link found.';
     }
 
+    // Write Persisted Membership Dates
     jsonfile.writeFileSync(file, membershipDates);
     
     console.log("Subject: " + subject);
     console.log("Text: " + text);
 
+    // If desired window, send email notification
     if (notificationWindow === process.env.NOTIFICATION_WINDOW) {
         email(subject, text);    
     }
 }
 
 function email(subject, text) {
-
     const nodemailer = require('nodemailer');
     const transporter = nodemailer.createTransport({
         service: process.env.EMAIL_SERVICE,

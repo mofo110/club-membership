@@ -5,7 +5,7 @@
 This is my quick and dirty node app to:
 
 * Get a Club Membership
-* Send email notification of membership CLOSE or OPEN status
+* Send email notification of membership OPEN or CLOSED status
 
 ## Requirements
 
@@ -50,6 +50,6 @@ EMAIL_PASS=<your_email_app_password>
 node get-club-membership.js
 ◇ injected env (5) from .env // tip: ⌘ override existing { override: true }
 Subject: Club Membership OPENED on 2026-07-16
-Text: https://<your_club_hostname>/membership
+Text: https://<your_club_hostname>/membership/
 Email sent: 250 OK , completed
 ```
