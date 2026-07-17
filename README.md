@@ -11,8 +11,8 @@ This is my quick and dirty node app to:
 
 * Node
 * Dotenv
-* Nodemailer
 * Jsonfile
+* Nodemailer
 
 ## References
 * Node.js Send an Email [W3Schools.com](https://www.w3schools.com/nodejs/nodejs_email.asp)
@@ -38,7 +38,6 @@ npm install
 ```bash
 # .env
 CLUB_HOSTNAME=<your_club_hostname>
-NOTIFICATION_WINDOW=<OPEN|CLOSED>
 EMAIL_SERVICE=<your_email_service>
 EMAIL_USER=<your_email_id>
 EMAIL_PASS=<your_email_app_password>
