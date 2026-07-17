@@ -1,5 +1,5 @@
 /**
- * Parse Club Membership Data Pagexs
+ * Parse Club Membership Data Page
  */
 
 function parseData(data, emailService, emailUser, emailPass) {
@@ -62,7 +62,7 @@ function parseLink(clickHere, emailService, emailUser, emailPass) {
             emailPass,
             subject,
             text);
-            
+
         // Write Persisted Membership
         membership.status = currentStatus;
         jsonfile.writeFileSync(file, membership);
