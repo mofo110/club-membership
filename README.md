@@ -47,7 +47,7 @@ EMAIL_PASS=<your_email_app_password>
 
 ```bash
 node get-club-membership.js
-◇ injected env (5) from .env // tip: ⌘ override existing { override: true }
+◇ injected env (4) from .env // tip: ⌘ override existing { override: true }
 Subject: Club Membership OPENED on 2026-07-16
 Text: https://<your_club_hostname>/membership/
 Email sent: 250 OK , completed
