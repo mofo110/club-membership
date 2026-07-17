@@ -91,32 +91,11 @@ function getLink(clickHere) {
 
     // If desired window, send email notification
     if (notificationWindow === process.env.NOTIFICATION_WINDOW) {
-        email(subject, text);    
+        const email = require('./email.js');
+        email(process.env.EMAIL_SERVICE,
+            process.env.EMAIL_USER,
+            process.env.EMAIL_PASS,
+            subject,
+            text);    
     }
-}
-
-function email(subject, text) {
-    const nodemailer = require('nodemailer');
-    const transporter = nodemailer.createTransport({
-        service: process.env.EMAIL_SERVICE,
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS
-        }
-    });
-
-    const mailOptions = {
-        from: process.env.EMAIL_USER,
-        to: process.env.EMAIL_USER,
-        subject: subject,
-        text: text
-    };
-    
-    transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('Email sent: ' + info.response);
-        }
-    });
 }
