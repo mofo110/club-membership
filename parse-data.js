@@ -16,9 +16,9 @@ function parseData(data, emailService, emailUser, emailPass) {
 
 function parseLink(clickHere, emailService, emailUser, emailPass) {
     // Read Persisted Membership Dates
-    const jsonfile = require('jsonfile');
-    const file = './data.json';
-    const membership = jsonfile.readFileSync(file);
+    const fs = require('fs');
+    const dataFile = './data.json';
+    const membership = JSON.parse(fs.readFileSync(dataFile, 'utf8'));
     const today = (new Date()).toISOString().split('T')[0];
 
     // Match for a hyperlink to open membership window
@@ -65,7 +65,8 @@ function parseLink(clickHere, emailService, emailUser, emailPass) {
 
         // Write Persisted Membership
         membership.status = currentStatus;
-        jsonfile.writeFileSync(file, membership);
+        const output = JSON.stringify(membership, null, 4);
+        fs.writeFileSync(dataFile, output);
     }
 }
 

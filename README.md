@@ -11,7 +11,6 @@ This is my quick and dirty node app to:
 
 * Node
 * Dotenv
-* Jsonfile
 * Nodemailer
 
 ## References
