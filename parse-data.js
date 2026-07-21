@@ -19,8 +19,10 @@ function parseLink(clickHere, emailService, emailUser, emailPass) {
     const fs = require('fs');
     const dataFile = './data.json';
     const membership = JSON.parse(fs.readFileSync(dataFile, 'utf8'));
-    const today = (new Date()).toISOString().split('T')[0];
-
+    const today = formatDate(new Date());
+    // Send email reminder every 7 days   
+    const nextEmailDate = addDays(membership.emailDate, 7);
+    
     // Match for a hyperlink to open membership window
     const regex = new RegExp(/href="(.*?)"/);
     const match = regex.exec(clickHere.replaceAll('\n', ''));
@@ -53,8 +55,10 @@ function parseLink(clickHere, emailService, emailUser, emailPass) {
     console.log("Subject: " + subject);
     console.log("Text: " + text);
 
-    // If membership status changed, send email notification
-    if (currentStatus === membership.status) {}
+    if (currentStatus === membership.status 
+        &&
+        today < nextEmailDate) {}
+    // If membership status changed or due date, send email
     else {
         const email = require('./email.js');
         email(emailService,
@@ -65,9 +69,21 @@ function parseLink(clickHere, emailService, emailUser, emailPass) {
 
         // Write Persisted Membership
         membership.status = currentStatus;
+        membership.emailDate = today;
         const output = JSON.stringify(membership, null, 4);
         fs.writeFileSync(dataFile, output);
     }
+}
+
+function addDays(date, days) {
+    const tempDate = new Date(date);
+    tempDate.setDate(tempDate.getDate() + days);
+    return formatDate(tempDate);
+}
+
+function formatDate(date) {
+    const tempDate = new Date(date);
+    return tempDate.toISOString().split('T')[0];
 }
 
 module.exports = parseData;

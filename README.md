@@ -7,6 +7,9 @@ This is my quick and dirty node app to:
 * Get a Club Membership
 * Send email notification of membership OPEN or CLOSED status
 
+> [!WARNING]
+> An email reminder will be sent every 7 days.
+
 ## Requirements
 
 * Node
