@@ -36,7 +36,7 @@ cd club-membership
 npm install
 ```
 
-### Step 3: Create .env file with club hostname, notifcation window, email service, username and password.
+### Step 3: Create .env file with club hostname, email service, username and password.
 ```bash
 # .env
 CLUB_HOSTNAME=<your_club_hostname>
